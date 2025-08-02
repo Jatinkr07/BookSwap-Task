@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
+import API_URL from "../utils/api";
 
 function BookCard({ book, isOwner }) {
   const queryClient = useQueryClient();
@@ -9,7 +10,7 @@ function BookCard({ book, isOwner }) {
   const requestMutation = useMutation({
     mutationFn: () =>
       axios.post(
-        "http://localhost:5500/api/requests",
+        `${API_URL}/api/requests`,
         { bookId: book._id },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -27,7 +28,7 @@ function BookCard({ book, isOwner }) {
 
   const deleteMutation = useMutation({
     mutationFn: () =>
-      axios.delete(`http://localhost:5500/api/books/${book._id}`, {
+      axios.delete(`${API_URL}/api/books/${book._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       }),
     onSuccess: () => {
@@ -42,7 +43,7 @@ function BookCard({ book, isOwner }) {
   return (
     <div className="border rounded-lg p-4 shadow-md">
       <img
-        src={`http://localhost:5500${book.image}`}
+        src={`${API_URL}${book.image}`}
         alt={book.title}
         className="w-full h-48 object-cover mb-2"
       />

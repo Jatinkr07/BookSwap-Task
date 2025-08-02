@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import API_URL from "../utils/api";
 
 function BookForm() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ function BookForm() {
     mutationFn: (data) => {
       const form = new FormData();
       for (const key in data) form.append(key, data[key]);
-      return axios.post("http://localhost:5500/api/books", form, {
+      return axios.post(`${API_URL}/api/books`, form, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
     },

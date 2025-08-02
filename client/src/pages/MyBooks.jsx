@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BookCard from "../components/BookCard";
+import API_URL from "../utils/api";
 
 function MyBooks() {
   const { data: books = [], isLoading } = useQuery({
     queryKey: ["myBooks"],
     queryFn: () =>
       axios
-        .get("http://localhost:5500/api/books/my", {
+        .get(`${API_URL}/api/books/my`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then((res) => res.data),

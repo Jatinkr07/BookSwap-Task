@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import RequestCard from "../components/RequestCard";
+import API_URL from "../utils/api";
 
 function MyRequests() {
   const { data: sentRequests = [], isLoading: sentLoading } = useQuery({
     queryKey: ["sentRequests"],
     queryFn: () =>
       axios
-        .get("http://localhost:5500/api/requests/my", {
+        .get(`${API_URL}/api/requests/my`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then((res) => res.data),
@@ -17,7 +18,7 @@ function MyRequests() {
     queryKey: ["receivedRequests"],
     queryFn: () =>
       axios
-        .get("http://localhost:5500/api/requests/received", {
+        .get(`${API_URL}/api/requests/received`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then((res) => res.data),

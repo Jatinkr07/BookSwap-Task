@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import API_URL from "../utils/api";
 
 function RequestCard({ request, isOwner }) {
   const queryClient = useQueryClient();
@@ -8,7 +9,7 @@ function RequestCard({ request, isOwner }) {
   const updateMutation = useMutation({
     mutationFn: (status) =>
       axios.put(
-        `http://localhost:5500/api/requests/${request._id}`,
+        `${API_URL}/api/requests/${request._id}`,
         { status },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

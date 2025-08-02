@@ -2,14 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BookCard from "../components/BookCard";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../utils/api";
 
 function Home() {
   const token = localStorage.getItem("token");
 
   const { data: books = [], isLoading } = useQuery({
     queryKey: ["books"],
-    queryFn: () =>
-      axios.get("http://localhost:5500/api/books").then((res) => res.data),
+    queryFn: () => axios.get(`${API_URL}/api/books`).then((res) => res.data),
   });
 
   if (isLoading) return <div>Loading...</div>;
